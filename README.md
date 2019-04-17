@@ -1,1 +1,1 @@
-# StupidAI-MineProject
+# gh-skeleton
