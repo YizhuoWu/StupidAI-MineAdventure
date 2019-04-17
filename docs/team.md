@@ -6,11 +6,11 @@ title:  Team
 # {{ page.title }}
 
 
-## USER 1
-***UCI Net ID***: ucinetid1
+## Yizhuo Wu
+***UCI Net ID***: yizhuw1
 
-## USER 2
-***UCI Net ID***: ucinetid2
+## Yunlu Ma
+***UCI Net ID***: yunlum
 
-## USER 3
+## Qiulu Li
 ***UCI Net ID***: ucinetid3
