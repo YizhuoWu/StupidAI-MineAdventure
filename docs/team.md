@@ -6,7 +6,8 @@ title:  Team
 # {{ page.title }}
 
 
-## Yizhuo Wu:smiling_imp::smiling_imp::smiling_imp::smiling_imp:
+## Yizhuo Wu:smile:
+:smile:
 ***UCI Net ID***: yizhuw1
 
 ## Yunlu Ma
