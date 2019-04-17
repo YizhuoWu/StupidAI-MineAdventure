@@ -3,7 +3,7 @@ layout: default
 title:  Home
 ---
 
-Source code: https://github.com/YizhuoWu/StupidAI-MineProject
+Source code: https://github.com/YizhuoWu/StupidAI-MineAdventure
 
 Reports:
 
