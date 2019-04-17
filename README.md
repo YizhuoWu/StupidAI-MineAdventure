@@ -1,1 +1,1 @@
-# gh-skeleton
+# StupidAI-MineAdventure
