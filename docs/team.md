@@ -6,8 +6,7 @@ title:  Team
 # {{ page.title }}
 
 
-## Yizhuo Wu:smile:
-:smile:
+## Yizhuo Wu
 ***UCI Net ID***: yizhuw1
 
 ## Yunlu Ma
