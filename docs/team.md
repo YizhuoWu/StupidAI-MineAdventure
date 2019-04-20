@@ -13,4 +13,4 @@ title:  Team
 ***UCI Net ID***: yunlum
 
 ## Qiulu Li
-***UCI Net ID***: ucinetid3
+***UCI Net ID***: qiulul
