@@ -1,8 +1,12 @@
-def observation_to_nums(obs):
+def observation_to_nums(obs,base_grid):
     alist = []
+    count = 0
     for i in obs:
         value = item_value(i)
+        if base_grid[count] == "lava":
+            value = -100
         alist.append(value)
+        count+=1
     return alist
 
 
@@ -11,6 +15,12 @@ def item_value(item):
     value = 0
     if item == "grass":
         value = 5
+    if item == "air":
+        value = 5
+    if item == "gold_block":
+        value = 0
+    if item == "iron_block":
+        value = 0
     if item == "dirt":
         value = 0
     if item == "redstone_block":
@@ -43,10 +53,10 @@ def make_action(index,agent_host):
         agent_host.sendCommand("strafe -1")
 
 def find_best_index(num_list,max_value):
-    if num_list[7] == max_value:
-        return 7
     if num_list[5] == max_value:
         return 5
+    if num_list[7] == max_value:
+        return 7
     return num_list.index(max_value)
 # Initial values of Aplha and Beta  
 MAX, MIN = 1000, -1000 

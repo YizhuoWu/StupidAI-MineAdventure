@@ -28,6 +28,13 @@ import json
 import errno
 import malmoutils
 import yi_Algorithm
+import World_Generator
+
+
+pitfall = World_Generator.Genpitfall()
+claywall = World_Generator.Genclaywall()
+lava = World_Generator.Genlava()
+highwall = World_Generator.Genhighwall()
 
 MAX, MIN = 1000, -1000 
 
@@ -37,7 +44,7 @@ agent_host = MalmoPython.AgentHost()
 agent_host.addOptionalIntArgument( "speed,s", "Length of tick, in ms.", 50)
 malmoutils.parse_command_line(agent_host)
 
-maze1 = '''
+map1 = '''
     <DrawingDecorator>
         <DrawBlock x="0" y="4" z="0" type="quartz_block" />
         <DrawBlock x="58" y="4" z="58" type="redstone_block" />
@@ -48,6 +55,17 @@ maze1 = '''
     </DrawingDecorator>
 '''
 
+map2 = '''
+    <DrawingDecorator>
+        <DrawBlock x="0" y="4" z="0" type="quartz_block" />
+        <DrawBlock x="58" y="4" z="58" type="redstone_block" />
+        <DrawCuboid x1="-1" y1="5" z1="-1" x2="59" y2="10" z2="-1" type="gold_block"/>
+        <DrawCuboid x1="-1" y1="5" z1="-1" x2="-1" y2="10" z2="59" type="gold_block"/>
+        <DrawCuboid x1="59" y1="5" z1="59" x2="-1" y2="10" z2="59" type="gold_block"/>
+        <DrawCuboid x1="59" y1="5" z1="59" x2="59" y2="10" z2="-1" type="gold_block"/>
+        '''+claywall+'''
+    </DrawingDecorator>
+'''
 
 def GetMissionXML( mazeblock, agent_host ):
     return '''<?xml version="1.0" encoding="UTF-8" ?>
@@ -85,7 +103,7 @@ def GetMissionXML( mazeblock, agent_host ):
                 <ObservationFromGrid>
                     <Grid name="floor3x3">
                         <min x="-1" y="-1" z="-1"/>
-                        <max x="1" y="-1" z="1"/>
+                        <max x="1" y="0" z="1"/>
                     </Grid>
                 </ObservationFromGrid>
 
@@ -95,7 +113,7 @@ def GetMissionXML( mazeblock, agent_host ):
     </Mission>'''
 
 validate = True
-mazeblocks = [maze1]
+mazeblocks = [map2]
 
 #agent_host.setObservationsPolicy(MalmoPython.ObservationsPolicy.LATEST_OBSERVATION_ONLY)
 
@@ -147,9 +165,13 @@ for iRepeat in range(num_reps):
             msg = world_state.observations[-1].text
             ob = json.loads(msg)
             grid = ob.get(u'floor3x3', 0)
-            print("grid:" + str(grid))
 
-            num_list = yi_Algorithm.observation_to_nums(grid)
+            base_grid = grid[0:9]
+            block_grid = grid[9:]
+            print("base grid:" + str(base_grid))
+            print("block grid:" + str(block_grid))
+
+            num_list = yi_Algorithm.observation_to_nums(block_grid,base_grid)
             print(num_list)
             max_value = yi_Algorithm.minimax(0, 0, True, num_list, MIN, MAX)
             print("val")
@@ -162,13 +184,7 @@ for iRepeat in range(num_reps):
             print("best index: ")
             print(index)
             yi_Algorithm.make_action(index,agent_host)
-            #print(max_value)
 
-            #if str(grid[5]) == "grass":
-                #agent_host.sendCommand("strafe -1")
-
-            #if str(grid[5]) == "dirt":
-                #agent_host.sendCommand("move 1")
 
 
     print("Mission has stopped.")
