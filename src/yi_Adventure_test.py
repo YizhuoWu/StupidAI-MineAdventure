@@ -31,18 +31,15 @@ import yi_Algorithm
 import World_Generator
 
 
+
+MAX, MIN = 1000, -1000 
 pitfall = World_Generator.Genpitfall()
 claywall = World_Generator.Genclaywall()
 lava = World_Generator.Genlava()
 highwall = World_Generator.Genhighwall()
-
-MAX, MIN = 1000, -1000 
-
-malmoutils.fix_print()
-
-agent_host = MalmoPython.AgentHost()
-agent_host.addOptionalIntArgument( "speed,s", "Length of tick, in ms.", 50)
-malmoutils.parse_command_line(agent_host)
+##agent_host = MalmoPython.AgentHost()
+##agent_host.addOptionalIntArgument( "speed,s", "Length of tick, in ms.", 50)
+##malmoutils.parse_command_line(agent_host)
 
 map1 = '''
     <DrawingDecorator>
@@ -75,11 +72,16 @@ def GetMissionXML( mazeblock, agent_host ):
         </About>
         
         <ModSettings>
-            <MsPerTick>''' + str(TICK_LENGTH) + '''</MsPerTick>
+            <MsPerTick>''' + str(35) + '''</MsPerTick>
         </ModSettings>
 
         <ServerSection>
             <ServerInitialConditions>
+                <Time>
+                    <StartTime>1000</StartTime>
+                    <AllowPassageOfTime>false</AllowPassageOfTime>
+                </Time>
+                <Weather>clear</Weather>
                 <AllowSpawning>false</AllowSpawning>
             </ServerInitialConditions>
             <ServerHandlers>
@@ -93,13 +95,20 @@ def GetMissionXML( mazeblock, agent_host ):
         <AgentSection mode="Survival">
             <Name>James Bond</Name>
             <AgentStart>
-                <Placement x="0" y="5" z="0"/>
+                <Placement x="0.5" y="5" z="0.5"/>
             </AgentStart>
             <AgentHandlers>
                 <ContinuousMovementCommands turnSpeedDegs="840"/>
                 <AgentQuitFromTouchingBlockType>
                     <Block type="redstone_block"/>
                 </AgentQuitFromTouchingBlockType>
+
+                <ChatCommands> </ChatCommands>
+                <ObservationFromFullStats/>
+
+
+
+                
                 <ObservationFromGrid>
                     <Grid name="floor3x3">
                         <min x="-1" y="-1" z="-1"/>
@@ -117,22 +126,42 @@ mazeblocks = [map2]
 
 #agent_host.setObservationsPolicy(MalmoPython.ObservationsPolicy.LATEST_OBSERVATION_ONLY)
 
-if agent_host.receivedArgument("test"):
-    num_reps = 10
-else:
-    num_reps = 30000
+##if agent_host.receivedArgument("test"):
+##    num_reps = 10
+##else:
+##    num_reps = 30000
 
-TICK_LENGTH = agent_host.getIntArgument("speed")
+##TICK_LENGTH = agent_host.getIntArgument("speed")
 
-for iRepeat in range(num_reps):
+for iRepeat in range(10):
+    pitfall = World_Generator.Genpitfall()
+    claywall = World_Generator.Genclaywall()
+    lava = World_Generator.Genlava()
+    highwall = World_Generator.Genhighwall()
+    malmoutils.fix_print()
+
+    agent_host = MalmoPython.AgentHost()
+##    agent_host.addOptionalIntArgument( "speed,s", "Length of tick, in ms.", 50)
+    malmoutils.parse_command_line(agent_host)
+    
+
+
+    
     my_mission_record = malmoutils.get_default_recording_object(agent_host, "Mission 1")
     mazeblock = random.choice(mazeblocks)
     my_mission = MalmoPython.MissionSpec(GetMissionXML(mazeblock, agent_host),validate)
+
+    my_mission.requestVideo(800, 500)
+    my_mission.setViewpoint(1)
+
+
+
 
     max_retries = 3
     for retry in range(max_retries):
         try:
             agent_host.startMission( my_mission, my_mission_record )
+
             break
         except RuntimeError as e:
             if retry == max_retries - 1:
@@ -155,7 +184,19 @@ for iRepeat in range(num_reps):
     print()
 
     # main loop:
+    if world_state.is_mission_running:
+        agent_host.sendCommand('chat /difficulty hard')
+        agent_host.sendCommand('chat /effect @p 17 15 20')
     while world_state.is_mission_running:
+
+        #agent_host.sendCommand('chat /difficulty hard')
+        #agent_host.sendCommand('chat /effect @p 17 15 20')
+
+
+
+
+
+        
         time.sleep(0.5)
         world_state = agent_host.getWorldState()
 
@@ -164,6 +205,8 @@ for iRepeat in range(num_reps):
 
             msg = world_state.observations[-1].text
             ob = json.loads(msg)
+
+            print("Hunger Val: "+ str(ob["Food"]))
             grid = ob.get(u'floor3x3', 0)
 
             base_grid = grid[0:9]
