@@ -37,9 +37,9 @@ pitfall = World_Generator.Genpitfall()
 claywall = World_Generator.Genclaywall()
 lava = World_Generator.Genlava()
 highwall = World_Generator.Genhighwall()
-##agent_host = MalmoPython.AgentHost()
-##agent_host.addOptionalIntArgument( "speed,s", "Length of tick, in ms.", 50)
-##malmoutils.parse_command_line(agent_host)
+
+agent_position = [0.5,0.5] #[x,z]
+destination = [58.5,58.5]#[x,z]
 
 map1 = '''
     <DrawingDecorator>
@@ -72,7 +72,7 @@ def GetMissionXML( mazeblock, agent_host ):
         </About>
         
         <ModSettings>
-            <MsPerTick>''' + str(35) + '''</MsPerTick>
+            <MsPerTick>''' + str(50) + '''</MsPerTick>
         </ModSettings>
 
         <ServerSection>
@@ -98,7 +98,8 @@ def GetMissionXML( mazeblock, agent_host ):
                 <Placement x="0.5" y="5" z="0.5"/>
             </AgentStart>
             <AgentHandlers>
-                <ContinuousMovementCommands turnSpeedDegs="840"/>
+                 
+                 <DiscreteMovementCommands/>
                 <AgentQuitFromTouchingBlockType>
                     <Block type="redstone_block"/>
                 </AgentQuitFromTouchingBlockType>
@@ -106,7 +107,9 @@ def GetMissionXML( mazeblock, agent_host ):
                 <ChatCommands> </ChatCommands>
                 <ObservationFromFullStats/>
 
-
+                <ObservationFromNearbyEntities>
+                    <Range name="Mobs" xrange="1000" yrange="1000" zrange="1000"/>
+                </ObservationFromNearbyEntities>
 
                 
                 <ObservationFromGrid>
@@ -173,6 +176,7 @@ for iRepeat in range(10):
     print("Waiting for the mission to start", end=' ')
     world_state = agent_host.getWorldState()
     while not world_state.has_mission_begun:
+        
         print(".", end="")
         time.sleep(0.1)
         world_state = agent_host.getWorldState()
@@ -184,9 +188,10 @@ for iRepeat in range(10):
     print()
 
     # main loop:
+    agent_position = [0.5,0.5]
     if world_state.is_mission_running:
         agent_host.sendCommand('chat /difficulty hard')
-        agent_host.sendCommand('chat /effect @p 17 15 20')
+        agent_host.sendCommand('chat /effect @p 7 1')
     while world_state.is_mission_running:
 
         #agent_host.sendCommand('chat /difficulty hard')
@@ -206,13 +211,26 @@ for iRepeat in range(10):
             msg = world_state.observations[-1].text
             ob = json.loads(msg)
 
-            print("Hunger Val: "+ str(ob["Food"]))
+            print("Test: "+ str(len(ob["Mobs"])))
+            #full_grid = ob.get(u'floorAll', 0)
+
+                        
+            
             grid = ob.get(u'floor3x3', 0)
 
             base_grid = grid[0:9]
             block_grid = grid[9:]
             print("base grid:" + str(base_grid))
             print("block grid:" + str(block_grid))
+
+
+            #grass_list = find_grass(base_grid)
+
+
+
+
+
+
 
             num_list = yi_Algorithm.observation_to_nums(block_grid,base_grid)
             print(num_list)
@@ -224,9 +242,13 @@ for iRepeat in range(10):
                 index = yi_Algorithm.find_best_index(num_list,max_value)
             else:
                 index = num_list.index(max_value)
+
+
+                
             print("best index: ")
             print(index)
             yi_Algorithm.make_action(index,agent_host)
+
 
 
 

@@ -1,3 +1,5 @@
+import yi_Adventure_test
+
 def observation_to_nums(obs,base_grid):
     alist = []
     count = 0
@@ -28,29 +30,60 @@ def item_value(item):
     return value
 
 def make_action(index,agent_host):
+    agent_position = yi_Adventure_test.agent_position
     if index == 0:
-        agent_host.sendCommand("move -1")
-        agent_host.sendCommand("strafe +1")        
+        #agent_host.sendCommand("move -1")
+        #agent_host.sendCommand("strafe +1")
+        agent_host.sendCommand("movenorth 1")
+        agent_host.sendCommand("movewest 1")
+    
+        agent_position[1] = agent_position[1] - 1
+        agent_position[0] = agent_position[0] + 1
+        
     if index == 1:
-        agent_host.sendCommand("move -1")
+        #agent_host.sendCommand("move -1")
+        agent_host.sendCommand("movenorth 1")
+
+        agent_position[1] = agent_position[1] - 1
     if index == 2:
-        agent_host.sendCommand("move -1")
-        agent_host.sendCommand("strafe -1")        
+        #agent_host.sendCommand("move -1")
+        #agent_host.sendCommand("strafe -1")
+        agent_host.sendCommand("movenorth 1")
+        agent_host.sendCommand("moveeast 1")
+        agent_position[1] = agent_position[1] - 1
+        agent_position[0] = agent_position[0] + 1
+        
     if index == 3:
-        agent_host.sendCommand("strafe +1")
+        #agent_host.sendCommand("strafe +1")
+        agent_host.sendCommand("movewest 1")
+        agent_position[0] = agent_position[0] - 1
     if index == 4:
         print("self")
         pass
     if index == 5:
-        agent_host.sendCommand("strafe -1")
+        #agent_host.sendCommand("strafe -1")
+        agent_host.sendCommand("moveeast 1")
+        agent_position[0] = agent_position[0] + 1     
     if index == 6:
-        agent_host.sendCommand("move 1")
-        agent_host.sendCommand("strafe +1")
+        #agent_host.sendCommand("move 1")
+        #agent_host.sendCommand("strafe +1")
+        agent_host.sendCommand("movesouth 1")
+        agent_host.sendCommand("movewest 1")
+        
+        agent_position[1] = agent_position[1] + 1
+        agent_position[0] = agent_position[0] - 1
     if index == 7:
-        agent_host.sendCommand("move 1")
+        #agent_host.sendCommand("move 1")
+        agent_host.sendCommand("movesouth 1")
+        agent_position[1] = agent_position[1] + 1
     if index == 8:
-        agent_host.sendCommand("move 1")
-        agent_host.sendCommand("strafe -1")
+        #agent_host.sendCommand("move 1")
+        #agent_host.sendCommand("strafe -1")
+        agent_host.sendCommand("movesouth 1")
+        agent_host.sendCommand("moveeast 1")
+        
+        agent_position[1] = agent_position[1] + 1
+        agent_position[0] = agent_position[0] + 1
 
 def find_best_index(num_list,max_value):
     if num_list[5] == max_value:
