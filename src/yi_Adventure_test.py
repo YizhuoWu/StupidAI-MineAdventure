@@ -224,7 +224,7 @@ for iRepeat in range(10):
             print("block grid:" + str(block_grid))
 
 
-            #grass_list = find_grass(base_grid)
+            grass_list = find_grass(base_grid)
 
 
 

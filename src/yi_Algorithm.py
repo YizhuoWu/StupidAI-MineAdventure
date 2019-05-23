@@ -29,6 +29,18 @@ def item_value(item):
         value = 100
     return value
 
+def find_grass(base_grid):
+    count = 0
+    alist = []
+    for i in base_grid:
+        if i == "grass":
+            alist.append(count)
+
+        count += 1
+
+    return alist
+    
+
 def make_action(index,agent_host):
     agent_position = yi_Adventure_test.agent_position
     if index == 0:
