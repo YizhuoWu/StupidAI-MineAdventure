@@ -1,4 +1,4 @@
-import yi_Adventure_test
+#import yi_Adventure_test
 
 def observation_to_nums(obs,base_grid):
     alist = []
@@ -41,59 +41,46 @@ def find_grass(base_grid):
     return alist
     
 
-def make_action(index,agent_host):
-    agent_position = yi_Adventure_test.agent_position
+def make_action(index,agent_host,agent_position):
+
     if index == 0:
-        #agent_host.sendCommand("move -1")
-        #agent_host.sendCommand("strafe +1")
+
         agent_host.sendCommand("movenorth 1")
-        agent_host.sendCommand("movewest 1")
-    
+        agent_host.sendCommand("movewest 1")  
         agent_position[1] = agent_position[1] - 1
         agent_position[0] = agent_position[0] + 1
         
-    if index == 1:
-        #agent_host.sendCommand("move -1")
-        agent_host.sendCommand("movenorth 1")
+    if index == 17:
+        agent_host.sendCommand("movesouth 1")
 
-        agent_position[1] = agent_position[1] - 1
+        agent_position[1] = agent_position[1] + 1
     if index == 2:
-        #agent_host.sendCommand("move -1")
-        #agent_host.sendCommand("strafe -1")
         agent_host.sendCommand("movenorth 1")
         agent_host.sendCommand("moveeast 1")
         agent_position[1] = agent_position[1] - 1
         agent_position[0] = agent_position[0] + 1
         
-    if index == 3:
-        #agent_host.sendCommand("strafe +1")
+    if index == 11:
         agent_host.sendCommand("movewest 1")
         agent_position[0] = agent_position[0] - 1
     if index == 4:
         print("self")
         pass
-    if index == 5:
-        #agent_host.sendCommand("strafe -1")
+    if index == 13:
         agent_host.sendCommand("moveeast 1")
         agent_position[0] = agent_position[0] + 1     
     if index == 6:
-        #agent_host.sendCommand("move 1")
-        #agent_host.sendCommand("strafe +1")
         agent_host.sendCommand("movesouth 1")
         agent_host.sendCommand("movewest 1")
         
         agent_position[1] = agent_position[1] + 1
         agent_position[0] = agent_position[0] - 1
     if index == 7:
-        #agent_host.sendCommand("move 1")
-        agent_host.sendCommand("movesouth 1")
-        agent_position[1] = agent_position[1] + 1
+        agent_host.sendCommand("movenorth 1")
+        agent_position[1] = agent_position[1] - 1
     if index == 8:
-        #agent_host.sendCommand("move 1")
-        #agent_host.sendCommand("strafe -1")
         agent_host.sendCommand("movesouth 1")
         agent_host.sendCommand("moveeast 1")
-        
         agent_position[1] = agent_position[1] + 1
         agent_position[0] = agent_position[0] + 1
 
@@ -103,6 +90,114 @@ def find_best_index(num_list,max_value):
     if num_list[7] == max_value:
         return 7
     return num_list.index(max_value)
+
+
+def find_one_step(base_grid,agent_position):
+    alist  = [(base_grid[7],7),(base_grid[11],11),(base_grid[13],13),(base_grid[17],17)]
+    if agent_position[0] == 0.5:
+        alist.remove((base_grid[11],11))
+    if agent_position[0] == 58.5:
+         alist.remove((base_grid[13],13))
+    if agent_position[1] == 58.5:
+         alist.remove((base_grid[17],17))
+    if agent_position[1] == 0.5:
+         alist.remove((base_grid[7],7))
+    result = []
+    for i in alist:
+        if str(i[0]) == "grass" or str(i[0]) == "quartz_block":
+            result.append(i[1])
+        if str(i[0]) == "redstone_block":
+            result = [i[1]]
+            return result
+
+
+    return result
+
+def second_step_list(index,base_grid,agent_position):
+
+    result = []
+    if index == 7:
+        if agent_position[1] == 1.5:
+            result = [6,8]
+        else:
+            result = [2,6,8]
+    if index == 11:
+        if agent_position[0] == 1.5:
+            result = [6,16]
+        else:
+            result = [6,10,16]
+    if index == 13:
+        if agent_position[0] == 57.5:
+             result = [8,18]
+        else:
+            result = [8,14,18]
+    if index == 17:
+        if agent_position[1] == 57.5:
+            result = [16,18]
+        else:
+            result = [16,18,22]
+    return result
+        
+
+
+def compute_second_step(grass_index_list,agent_position,base_grid):
+
+    primary_values = {}
+
+    for i in grass_index_list:
+
+        second_steps =  second_step_list(i,base_grid,agent_position)
+
+        values = {}
+        
+
+        for p in second_steps:
+
+            if base_grid[p] == "grass" or base_grid[p] == "redstone_block" or base_grid[p] == "quartz_block":
+
+                values[p] = compute_distance(i,p,agent_position)
+
+        sorted_values = sorted(values.items(), key=lambda kv: kv[1])
+
+
+        print("ss:"+str(sorted_values))
+        min_val_item = sorted_values[0]
+
+        primary_values[i] = min_val_item[1]
+
+
+    print(primary_values)
+    sorted_values_1 = sorted(primary_values.items(), key=lambda kv: kv[1])
+
+    min_index = sorted_values_1[0][0]
+        
+    return min_index
+
+
+def compute_distance(i,p,agent_position):
+    print(agent_position)
+    distance = (58.5-agent_position[0])+(58.5-agent_position[1])
+    print("dis"+str(distance))
+    if i == 7 or i == 11 :
+        dis_temp = distance + 1
+        if p == 2 or p == 6 or p == 10:
+            return dis_temp + 1
+        if p == 16 or p == 8:
+            return dis_temp - 1
+    elif i == 17 or i == 13:
+        dis_temp = distance - 1
+        if p == 8 or p == 16:
+            return dis_temp + 1
+        if p == 14 or p == 18 or p == 22:
+            return dis_temp - 1
+            
+        
+
+
+
+
+
+
 # Initial values of Aplha and Beta  
 MAX, MIN = 1000, -1000 
   

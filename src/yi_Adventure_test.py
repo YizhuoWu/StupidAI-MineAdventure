@@ -60,7 +60,7 @@ map2 = '''
         <DrawCuboid x1="-1" y1="5" z1="-1" x2="-1" y2="10" z2="59" type="gold_block"/>
         <DrawCuboid x1="59" y1="5" z1="59" x2="-1" y2="10" z2="59" type="gold_block"/>
         <DrawCuboid x1="59" y1="5" z1="59" x2="59" y2="10" z2="-1" type="gold_block"/>
-        '''+claywall+'''
+        '''+lava+'''
     </DrawingDecorator>
 '''
 
@@ -87,7 +87,7 @@ def GetMissionXML( mazeblock, agent_host ):
             <ServerHandlers>
                 <FlatWorldGenerator generatorString="3;1*minecraft:lava,1*minecraft:bedrock,1*minecraft:ice,1*minecraft:dirt,1*minecraft:grass" />
                 ''' + mazeblock + '''
-                <ServerQuitFromTimeUp timeLimitMs="450000"/>
+                <ServerQuitFromTimeUp timeLimitMs="450000000"/>
                 <ServerQuitWhenAnyAgentFinishes />
             </ServerHandlers>
         </ServerSection>
@@ -107,15 +107,13 @@ def GetMissionXML( mazeblock, agent_host ):
                 <ChatCommands> </ChatCommands>
                 <ObservationFromFullStats/>
 
-                <ObservationFromNearbyEntities>
-                    <Range name="Mobs" xrange="1000" yrange="1000" zrange="1000"/>
-                </ObservationFromNearbyEntities>
+
 
                 
                 <ObservationFromGrid>
-                    <Grid name="floor3x3">
-                        <min x="-1" y="-1" z="-1"/>
-                        <max x="1" y="0" z="1"/>
+                    <Grid name="floor5x5">
+                        <min x="-2" y="-1" z="-2"/>
+                        <max x="2" y="0" z="2"/>
                     </Grid>
                 </ObservationFromGrid>
 
@@ -211,30 +209,33 @@ for iRepeat in range(10):
             msg = world_state.observations[-1].text
             ob = json.loads(msg)
 
-            print("Test: "+ str(len(ob["Mobs"])))
             #full_grid = ob.get(u'floorAll', 0)
 
                         
             
-            grid = ob.get(u'floor3x3', 0)
+            #grid = ob.get(u'floor3x3', 0)
 
-            base_grid = grid[0:9]
-            block_grid = grid[9:]
+            grid = ob.get(u'floor5x5', 0)
+
+
+            base_grid = grid[0:25]
+            block_grid = grid[25:]
             print("base grid:" + str(base_grid))
             print("block grid:" + str(block_grid))
 
 
-            grass_list = find_grass(base_grid)
+            grass_index_list = yi_Algorithm.find_one_step(base_grid,agent_position)
+            
+            #if
 
 
-
-
+            """
 
 
 
             num_list = yi_Algorithm.observation_to_nums(block_grid,base_grid)
             print(num_list)
-            max_value = yi_Algorithm.minimax(0, 0, True, num_list, MIN, MAX)
+            #max_value = yi_Algorithm.minimax(0, 0, True, num_list, MIN, MAX)
             print("val")
             print(max_value)
             if num_list.count(max_value)>1:
@@ -244,12 +245,13 @@ for iRepeat in range(10):
                 index = num_list.index(max_value)
 
 
-                
+            """
+            index = yi_Algorithm.compute_second_step(grass_index_list,agent_position,base_grid)
             print("best index: ")
             print(index)
-            yi_Algorithm.make_action(index,agent_host)
+            yi_Algorithm.make_action(index,agent_host,agent_position)
 
-
+            
 
 
     print("Mission has stopped.")

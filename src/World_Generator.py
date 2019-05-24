@@ -54,16 +54,22 @@ def Genclaywall():
 
 def Genlava():
     lava = ""
+
     lava_number = random.randint(5, 10)
         
     for i in range(lava_number):
         sizex = random.randint(1,5)
         sizez = random.randint(1,5)
-        startx = random.randint(5,57)
-        startz = random.randint(5,57)
-        y = random.randint(2,4)
-        lava += GenCuboid (startx,y,startz,startx+sizex,y,startz+sizez,"lava","")
-
+        startx = random.randint(1,57)
+        startz = random.randint(1,57)
+        if (startx == 0 and startz == 0) or (startx == 58 and startz == 58) :
+             startz = random.randint(1,57)
+        
+        if startx+sizex >= 58 and startz+sizez >= 58:
+            lava += GenCuboid (startx,4,startz,58,4,57,"lava","")
+        else:
+            lava += GenCuboid (startx,4,startz,startx+sizex,4,startz+sizez,"lava","")
+    lava += GenCuboid (32,4,0,34,4,3,"lava","")
     return lava
 
 def Genhighwall():
