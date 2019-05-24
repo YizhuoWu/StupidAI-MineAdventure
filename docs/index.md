@@ -3,16 +3,28 @@ layout: default
 title:  Home
 ---
 
-![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/index_img_1.jpg "IMG 1")
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
+# Welcome to StupidAI's project: MineAdventure!
+
+## What is MineAdventure?
+The project is going to be an adventure game for our Minecraft agent. 
+In the project, there will be a randomly generated adventure map for our agent, the goal of our agent is 
+to leave this “dangerous” area as soon as possible while our agent is alive, in other words, our agent should 
+use AI/ML algorithms to find the best way to leave this map(arrive at destination). We defined the best way 
+as the shortest path from start point to end point while the agent is alive.
+
+
+[Take a look at our source code here!](https://github.com/YizhuoWu/StupidAI-MineAdventure)
 
 
 
 
-Source code: https://github.com/YizhuoWu/StupidAI-MineAdventure
+
 
 Reports:
 
-- [Proposal](proposal.html)
-- [Status](status.html)
-- [Final](final.html)
+- [To read our proposal, click here](proposal.html)
+- [To read our status report, click here](status.html)
+- [To read our final report, click here](final.html)
 
