@@ -16,14 +16,18 @@ use AI/ML algorithms to find the best way to leave this map(arrive at destinatio
 as the shortest path from start point to end point while the agent is alive.
 
 ### Want to see how does the internal algorithms work?
-[Take a look at our source code here!](https://github.com/YizhuoWu/StupidAI-MineAdventure)
+- [Take a look at our source code here!](https://github.com/YizhuoWu/StupidAI-MineAdventure)
 
-### You might want to read our reports
+### You might want to read our reports!
+
 - [To read our proposal, click here](proposal.html)
 - [To read our status report, click here](status.html)
 - [To read our final report, click here](final.html)
 
 ### Interested in watching video explanation?
+
+- Click on the image here to watch the three-minutes video !
+
 <a href="https://www.youtube.com/watch?v=2PWox0341OI" target="_blank"><img src="https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Video.jpg?raw=true" 
 alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
