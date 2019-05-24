@@ -18,14 +18,13 @@ as the shortest path from start point to end point while the agent is alive.
 ### Want to see how does the internal algorithms work?
 [Take a look at our source code here!](https://github.com/YizhuoWu/StupidAI-MineAdventure)
 
-###You might want to read our reports
-
-
-### Interested in watching video explanation?
-
+### You might want to read our reports
 - [To read our proposal, click here](proposal.html)
 - [To read our status report, click here](status.html)
 - [To read our final report, click here](final.html)
+
+### Interested in watching video explanation?
+
 
 ### Here are some pictures of our project!
 ![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Malmo%20Pictures/1.png?raw=true"Img1") 
