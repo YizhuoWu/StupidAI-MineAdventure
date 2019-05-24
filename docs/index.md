@@ -3,7 +3,7 @@ layout: default
 title:  Home
 ---
 
-![alt text](https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwifgNTNnLXiAhVVJTQIHd-0A4YQjRx6BAgBEAU&url=%2Furl%3Fsa%3Di%26source%3Dimages%26cd%3D%26ved%3D2ahUKEwiImMbNnLXiAhUyHTQIHcvODGoQjRx6BAgBEAU%26url%3Dhttps%253A%252F%252Fwww.pinterest.com%252Fpin%252F351912454922900%252F%26psig%3DAOvVaw0Iw8vi6f70keWegfHNKt0R%26ust%3D1558823584035124&psig=AOvVaw0Iw8vi6f70keWegfHNKt0R&ust=1558823584035124 "Logo Title Text 1")
+![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/arts/1.jpg?raw=true "Logo Title Text 1")
 
 # Welcome to StupidAI's project: MineAdventure!
 
