@@ -1,5 +1,5 @@
 #import yi_Adventure_test
-
+import time
 def observation_to_nums(obs,base_grid):
     alist = []
     count = 0
@@ -52,6 +52,9 @@ def make_action(index,agent_host,agent_position):
         
     if index == 17:
         agent_host.sendCommand("movesouth 1")
+        agent_host.sendCommand('chat /effect @p 17 1 15');
+        time.sleep(1)
+        
 
         agent_position[1] = agent_position[1] + 1
     if index == 2:
@@ -62,12 +65,16 @@ def make_action(index,agent_host,agent_position):
         
     if index == 11:
         agent_host.sendCommand("movewest 1")
+        agent_host.sendCommand('chat /effect @p 17 1 15');
+        time.sleep(1)
         agent_position[0] = agent_position[0] - 1
     if index == 4:
         print("self")
         pass
     if index == 13:
         agent_host.sendCommand("moveeast 1")
+        agent_host.sendCommand('chat /effect @p 17 1 15');
+        time.sleep(1)
         agent_position[0] = agent_position[0] + 1     
     if index == 6:
         agent_host.sendCommand("movesouth 1")
@@ -77,6 +84,8 @@ def make_action(index,agent_host,agent_position):
         agent_position[0] = agent_position[0] - 1
     if index == 7:
         agent_host.sendCommand("movenorth 1")
+        agent_host.sendCommand('chat /effect @p 17 1 15');
+        time.sleep(1)
         agent_position[1] = agent_position[1] - 1
     if index == 8:
         agent_host.sendCommand("movesouth 1")
@@ -156,6 +165,8 @@ def compute_second_step(grass_index_list,agent_position,base_grid):
             if base_grid[p] == "grass" or base_grid[p] == "redstone_block" or base_grid[p] == "quartz_block":
 
                 values[p] = compute_distance(i,p,agent_position)
+                
+                
 
         sorted_values = sorted(values.items(), key=lambda kv: kv[1])
 

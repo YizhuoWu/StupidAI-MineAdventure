@@ -87,7 +87,6 @@ def GetMissionXML( mazeblock, agent_host ):
             <ServerHandlers>
                 <FlatWorldGenerator generatorString="3;1*minecraft:lava,1*minecraft:bedrock,1*minecraft:ice,1*minecraft:dirt,1*minecraft:grass" />
                 ''' + mazeblock + '''
-                <ServerQuitFromTimeUp timeLimitMs="450000000"/>
                 <ServerQuitWhenAnyAgentFinishes />
             </ServerHandlers>
         </ServerSection>
@@ -189,7 +188,7 @@ for iRepeat in range(10):
     agent_position = [0.5,0.5]
     if world_state.is_mission_running:
         agent_host.sendCommand('chat /difficulty hard')
-        agent_host.sendCommand('chat /effect @p 7 1')
+        #agent_host.sendCommand('chat /effect @p 7 1')
     while world_state.is_mission_running:
 
         #agent_host.sendCommand('chat /difficulty hard')
