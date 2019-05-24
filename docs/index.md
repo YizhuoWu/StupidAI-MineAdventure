@@ -20,6 +20,7 @@ as the shortest path from start point to end point while the agent is alive.
 ### Interested in watching video explanation?
 
 ### Here are some pictures of our project!
+![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Malmo%20Pictures/1.png?raw=true"Logo Title Text 1") ![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Malmo%20Pictures/1.png?raw=true"Logo Title Text 1")
 
 
 
