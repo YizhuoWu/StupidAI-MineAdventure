@@ -3,7 +3,7 @@ layout: default
 title:  Home
 ---
 
-![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/arts/1.jpg?raw=true "Logo Title Text 1")
+![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/life-adventure-e1443541694838.jpg?raw=true "Logo Title Text 1")
 
 # Welcome to StupidAI's project: MineAdventure!
 
