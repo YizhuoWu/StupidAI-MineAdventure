@@ -20,18 +20,25 @@ as the shortest path from start point to end point while the agent is alive.
 
 ### You might want to read our reports!
 
+
 - [To read our proposal, click here](proposal.html)
 - [To read our status report, click here](status.html)
 - [To read our final report, click here](final.html)
 
+
 ### Interested in watching video explanation?
 
+
 - Click on the image here to watch the three-minutes video !
+
 
 <a href="https://youtu.be/9RupCMV-pkw" target="_blank"><img src="https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Video.jpg?raw=true" 
 alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
+
+
 ### Here are some pictures of our project!
+
 ![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Malmo%20Pictures/1.png?raw=true"Img1") 
 ![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Malmo%20Pictures/2.png?raw=true"Img2") 
 ![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Malmo%20Pictures/3.png?raw=true"Img3") 
