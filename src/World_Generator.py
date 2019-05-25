@@ -47,15 +47,15 @@ def Genclaywall():
         else:
             sizez = 0
     
-    color = random.sample(["WHITE", "ORANGE", "MAGENTA","LIGHT_BLUE","LIME", "PINK", "GRAY","CYAN","PURPLE","BLUE","BROWN","GREEN","RED","BLACK"],1)
+    color = random.sample(["WHITE", "ORANGE", "MAGENTA","LIGHT_BLUE","LIME", "PINK", "GRAY","CYAN","PURPLE","BLUE","BROWN","RED","BLACK"],1)
     clay += GenCuboid (startx,5,startz,startx+sizex,5,startz+sizez,"stained_hardened_clay",color[0])
 
     return clay
 
 def Genlava():
     lava = ""
-
-    lava_number = random.randint(5, 10)
+    '''
+    lava_number = random.randint(3, 5)
         
     for i in range(lava_number):
         sizex = random.randint(1,5)
@@ -63,13 +63,18 @@ def Genlava():
         startx = random.randint(1,57)
         startz = random.randint(1,57)
         if (startx == 0 and startz == 0) or (startx == 58 and startz == 58) :
+             startx = random.randint(1,57)
              startz = random.randint(1,57)
         
         if startx+sizex >= 58 and startz+sizez >= 58:
-            lava += GenCuboid (startx,4,startz,58,4,57,"lava","")
+            lava += GenCuboid (startx,4,startz,57,4,57,"lava","")
         else:
             lava += GenCuboid (startx,4,startz,startx+sizex,4,startz+sizez,"lava","")
+    '''
     lava += GenCuboid (32,4,0,34,4,3,"lava","")
+    lava += GenCuboid (3,4,14,0,4,18,"lava","")
+    lava += GenCuboid (25,4,45,32,4,50,"lava","")
+    lava += GenCuboid (48,4,30,57,4,35,"lava","")
     return lava
 
 def Genhighwall():
