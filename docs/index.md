@@ -32,7 +32,7 @@ as the shortest path from start point to end point while the agent is alive.
 - Click on the image here to watch the three-minutes video !
 
 
-<a href="https://youtu.be/9RupCMV-pkw" target="_blank"><img src="https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Video.jpg?raw=true" 
+<a href="https://youtu.be/xDyvuzzZx9k" target="_blank"><img src="https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Video.jpg?raw=true" 
 alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
 
