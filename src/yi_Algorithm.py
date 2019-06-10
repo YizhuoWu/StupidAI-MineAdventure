@@ -1,5 +1,6 @@
 #import yi_Adventure_test
 import time
+import random
 def observation_to_nums(obs,base_grid):
     alist = []
     count = 0
@@ -153,9 +154,12 @@ def compute_second_step(grass_index_list,agent_position,base_grid):
 
     primary_values = {}
 
+    print("list: " + str(grass_index_list))
+
     for i in grass_index_list:
 
         second_steps =  second_step_list(i,base_grid,agent_position)
+        print("second_steps: " + str(second_steps))
 
         values = {}
         
@@ -165,30 +169,48 @@ def compute_second_step(grass_index_list,agent_position,base_grid):
             if base_grid[p] == "grass" or base_grid[p] == "redstone_block" or base_grid[p] == "quartz_block":
 
                 values[p] = compute_distance(i,p,agent_position)
+                #print("ans: " + str(p) + ": " + str(values[p]))
                 
                 
 
         sorted_values = sorted(values.items(), key=lambda kv: kv[1])
+                
+                
+
+        if sorted_values != []:
+            
+            print("sorted_value: " + str(sorted_values))
+            min_val_item = sorted_values[0]
+            primary_values[i] = min_val_item[1]
 
 
-        print("ss:"+str(sorted_values))
-        min_val_item = sorted_values[0]
 
-        primary_values[i] = min_val_item[1]
-
-
-    print(primary_values)
     sorted_values_1 = sorted(primary_values.items(), key=lambda kv: kv[1])
+    print("list (index,cost): "+str(sorted_values_1))
 
-    min_index = sorted_values_1[0][0]
-        
+    min_val = sorted_values_1[0][1]
+    print("min_val: "+str(min_val) )
+
+    flag = 0
+
+    for v in range(1,len(sorted_values_1)):
+        print("v: " + str(v))
+        if sorted_values_1[v][1] != min_val:
+            print("v1: " + str(v))
+            flag = 1
+            index = random.randint(0,v-1)
+            break
+
+    if flag == 0:
+        index = random.randint(0,len(sorted_values_1)-1)
+    #min_index = sorted_values_1[0][0]
+    min_index = sorted_values_1[index][0]
     return min_index
 
 
 def compute_distance(i,p,agent_position):
     print(agent_position)
     distance = (58.5-agent_position[0])+(58.5-agent_position[1])
-    print("dis"+str(distance))
     if i == 7 or i == 11 :
         dis_temp = distance + 1
         if p == 2 or p == 6 or p == 10:
