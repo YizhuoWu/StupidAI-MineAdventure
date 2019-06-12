@@ -3,7 +3,7 @@ layout: default
 title: Final Report
 ---
 ## 1 Project Video: StupidAI-MineAdventure
-
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xDyvuzzZx9k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## 2 Project Summary
 
