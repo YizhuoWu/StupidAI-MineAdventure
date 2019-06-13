@@ -27,9 +27,8 @@ import time
 import json
 import errno
 import malmoutils
-import yi_Algorithm
+import A_star_search
 import World_Generator
-
 
 
 MAX, MIN = 1000, -1000 
@@ -46,10 +45,10 @@ map1 = '''
     <DrawingDecorator>
         <DrawBlock x="0" y="4" z="0" type="quartz_block" />
         <DrawBlock x="58" y="4" z="58" type="redstone_block" />
-        <DrawCuboid x1="-1" y1="5" z1="-1" x2="59" y2="10" z2="-1" type="gold_block"/>
-        <DrawCuboid x1="-1" y1="5" z1="-1" x2="-1" y2="10" z2="59" type="gold_block"/>
-        <DrawCuboid x1="59" y1="5" z1="59" x2="-1" y2="10" z2="59" type="gold_block"/>
-        <DrawCuboid x1="59" y1="5" z1="59" x2="59" y2="10" z2="-1" type="gold_block"/> 
+        <DrawCuboid x1="-1" y1="4" z1="-1" x2="59" y2="10" z2="-1" type="gold_block"/>
+        <DrawCuboid x1="-1" y1="4" z1="-1" x2="-1" y2="10" z2="59" type="gold_block"/>
+        <DrawCuboid x1="59" y1="4" z1="59" x2="-1" y2="10" z2="59" type="gold_block"/>
+        <DrawCuboid x1="59" y1="4" z1="59" x2="59" y2="10" z2="-1" type="gold_block"/> 
     </DrawingDecorator>
 '''
 
@@ -57,13 +56,29 @@ map2 = '''
     <DrawingDecorator>
         <DrawBlock x="0" y="4" z="0" type="quartz_block" />
         <DrawBlock x="58" y="4" z="58" type="redstone_block" />
-        <DrawCuboid x1="-1" y1="5" z1="-2" x2="59" y2="10" z2="-2" type="gold_block"/>
-        <DrawCuboid x1="-1" y1="5" z1="-1" x2="-1" y2="10" z2="59" type="gold_block"/>
-        <DrawCuboid x1="59" y1="5" z1="59" x2="-1" y2="10" z2="59" type="gold_block"/>
-        <DrawCuboid x1="59" y1="5" z1="59" x2="59" y2="10" z2="-1" type="gold_block"/>
+        <DrawCuboid x1="-1" y1="4" z1="-2" x2="59" y2="10" z2="-2" type="gold_block"/>
+        <DrawCuboid x1="-1" y1="4" z1="-1" x2="-1" y2="10" z2="59" type="gold_block"/>
+        <DrawCuboid x1="59" y1="4" z1="59" x2="-1" y2="10" z2="59" type="gold_block"/>
+        <DrawCuboid x1="59" y1="4" z1="59" x2="59" y2="10" z2="-1" type="gold_block"/>
         '''+normal+'''
+        
     </DrawingDecorator>
 '''
+
+def get_grid(world_state):
+    while world_state.is_mission_running:
+        time.sleep(0.1)
+        world_state = agent_host.getWorldState()
+        if len(world_state.errors) > 0:
+            raise AssertionError('Could not load grid.')
+
+        if world_state.number_of_observations_since_last_state > 0:
+            msg = world_state.observations[-1].text
+            ob = json.loads(msg)
+            full_grid = ob.get(u'floorAll', 0)
+            break
+    
+    return full_grid
 
 def GetMissionXML( mazeblock, agent_host ):
     return '''<?xml version="1.0" encoding="UTF-8" ?>
@@ -93,7 +108,7 @@ def GetMissionXML( mazeblock, agent_host ):
         </ServerSection>
 
         <AgentSection mode="Survival">
-            <Name>StupidAI(B)</Name>
+            <Name>StupidAI(A)</Name>
             <AgentStart>
                 <Placement x="0.5" y="5" z="0.5"/>
             </AgentStart>
@@ -111,11 +126,11 @@ def GetMissionXML( mazeblock, agent_host ):
 
                 
                 <ObservationFromGrid>
-                    <Grid name="floor5x5">
-                        <min x="-2" y="-1" z="-2"/>
-                        <max x="2" y="0" z="2"/>
-                    </Grid>
-                </ObservationFromGrid>
+                      <Grid name="floorAll">
+                        <min x="0" y="-1" z="0"/>
+                        <max x="58" y="-1" z="58"/>
+                      </Grid>
+                  </ObservationFromGrid>
 
                 </AgentHandlers>
         </AgentSection>
@@ -184,70 +199,32 @@ for iRepeat in range(10):
                 print("Error:",error.text)
                 exit()
     print()
-
+    
+    full_grid = get_grid(world_state)    
+    route = A_star_search.astar_search(full_grid)
+    for i in route:
+        print("route: " + str(i.position))
+    action_list = A_star_search.get_actions(route)
+    index = 0
     # main loop:
-    agent_position = [0.5,0.5]
-    total_steps = 0
+    #agent_position = [0.5,0.5]
     if world_state.is_mission_running:
         agent_host.sendCommand('chat /difficulty hard')
-        #agent_host.sendCommand('chat /effect @p 7 1')
     while world_state.is_mission_running:
-
-        #agent_host.sendCommand('chat /difficulty hard')
-        #agent_host.sendCommand('chat /effect @p 17 15 20')
-
-        time.sleep(0.5)
+        time.sleep(0.1)        
+        if index >= len(action_list):
+            print("Error:", "out of actions, but mission has not ended!")
+            time.sleep(2)
+        else:
+            agent_host.sendCommand(action_list[index])
+            agent_host.sendCommand('chat /effect @p 17 1 10')
+            time.sleep(1)
+        index += 1
+        if len(action_list) == index:
+            time.sleep(2)
         world_state = agent_host.getWorldState()
-
-
-        if world_state.number_of_observations_since_last_state > 0:
-
-            msg = world_state.observations[-1].text
-            ob = json.loads(msg)
-
-            #full_grid = ob.get(u'floorAll', 0)
-
-                        
-            
-            #grid = ob.get(u'floor3x3', 0)
-
-            grid = ob.get(u'floor5x5', 0)
-
-
-            base_grid = grid[0:25]
-            block_grid = grid[25:]
-
-
-            grass_index_list = yi_Algorithm.find_one_step(base_grid,agent_position)
-            
-            #if
-
-
-            """
-
-
-
-            num_list = yi_Algorithm.observation_to_nums(block_grid,base_grid)
-            print(num_list)
-            #max_value = yi_Algorithm.minimax(0, 0, True, num_list, MIN, MAX)
-            print("val")
-            print(max_value)
-            if num_list.count(max_value)>1:
-
-                index = yi_Algorithm.find_best_index(num_list,max_value)
-            else:
-                index = num_list.index(max_value)
-
-
-            """
-            index = yi_Algorithm.compute_second_step(grass_index_list,agent_position,base_grid)
-            print("best index: ")
-            print(index)
-            yi_Algorithm.make_action(index,agent_host,agent_position)
-            total_steps += 1
-
-            
-
-    print("total steps: " + str(total_steps))
+        
+        
+    print("total steps: " + str(len(action_list)))
     print("Mission has stopped.")
     time.sleep(0.5) # Give mod a little time to get back to dormant state.

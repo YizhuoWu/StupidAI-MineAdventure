@@ -44,6 +44,8 @@ def find_grass(base_grid):
 
 def make_action(index,agent_host,agent_position):
 
+    
+
     if index == 0:
 
         agent_host.sendCommand("movenorth 1")
@@ -53,7 +55,7 @@ def make_action(index,agent_host,agent_position):
         
     if index == 17:
         agent_host.sendCommand("movesouth 1")
-        agent_host.sendCommand('chat /effect @p 17 1 15');
+        agent_host.sendCommand('chat /effect @p 17 1 10');
         time.sleep(1)
         
 
@@ -66,7 +68,7 @@ def make_action(index,agent_host,agent_position):
         
     if index == 11:
         agent_host.sendCommand("movewest 1")
-        agent_host.sendCommand('chat /effect @p 17 1 15');
+        agent_host.sendCommand('chat /effect @p 17 1 10');
         time.sleep(1)
         agent_position[0] = agent_position[0] - 1
     if index == 4:
@@ -74,7 +76,7 @@ def make_action(index,agent_host,agent_position):
         pass
     if index == 13:
         agent_host.sendCommand("moveeast 1")
-        agent_host.sendCommand('chat /effect @p 17 1 15');
+        agent_host.sendCommand('chat /effect @p 17 1 10');
         time.sleep(1)
         agent_position[0] = agent_position[0] + 1     
     if index == 6:
@@ -85,7 +87,7 @@ def make_action(index,agent_host,agent_position):
         agent_position[0] = agent_position[0] - 1
     if index == 7:
         agent_host.sendCommand("movenorth 1")
-        agent_host.sendCommand('chat /effect @p 17 1 15');
+        agent_host.sendCommand('chat /effect @p 17 1 10');
         time.sleep(1)
         agent_position[1] = agent_position[1] - 1
     if index == 8:
@@ -194,9 +196,7 @@ def compute_second_step(grass_index_list,agent_position,base_grid):
     flag = 0
 
     for v in range(1,len(sorted_values_1)):
-        print("v: " + str(v))
         if sorted_values_1[v][1] != min_val:
-            print("v1: " + str(v))
             flag = 1
             index = random.randint(0,v-1)
             break
