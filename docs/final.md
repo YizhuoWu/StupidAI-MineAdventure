@@ -9,16 +9,30 @@ title: Final Report
 
 Our project is named MineAdventure. The project is going to be an adventure game for our Minecraft agent. In the project, there will be a randomly generated adventure map 
 for our agent, the goal of our agent is to leave this “dangerous” area as soon as possible while our agent is alive, in other words, our agent should use AI/ML algorithms 
-to find the best way to leave this map(arrive at destination). We defined the best way as the shortest path from start point to end point while the agent is alive.
+to find the path to leave this map(arrive at destination). The destination is the red block on the map and we also put the statement “mission stopped” to indicate that we 
+arrived at the destination.
 
 ## 3 Approaches
 
-In order to find the best way, which is the shortest path while the agent is alive, it is important to find the shortest distance from the current position to the destination, and 
-the agent should also avoid the barriers including lavas, iron walls. Hence we chose to use A* search algorithm to decide every step for our agent. A* search algorithm is 
-computed by f(n) =g(n) + h(n) where g(n) is the cost we have from the start point to the current position and h(n) is the optimal distance from the current position to the 
-destination. Because our agent will have four directions (four possible steps, we did not allow our agent to walk diagonally), so we need to the one which has the smallest 
-A* value, which is the f(n) value. We compute g(n) by the formula g(n) = (Full Health Value) - (Health Value Lost Since Start) and we can also compute h(n) by computing distance 
-from each nearby points to the destination. Then we can choose the best direction that our agent is going to.
+In order to find the path to success while the agent is alive, it is important to for our agnet to avoid the barriers including lavas,lakes, forests and iron walls. Hence we 
+chose to use A* search algorithm to decide every step for our agent. 
+A* search algorithm is computed by f(n) = g(n) + h(n). We define ‘g(n)’ and ‘h(n)’ as simply as possible below
+	
+	g(n) = abs(startpoint.x - currentpoint.x) + abs (startpoint.y - currentpoint.y)
+	(actual cost from start point to current point by using Manhattan distance)
+	
+and we explored different heuristics:
+	(1) h(n) = abs(currentpoint.x - destination.x) + abs (currentpoint.y - destination.y)
+		(actual cost from current point to destination point by using Manhattan distance)
+		
+		Since we have same distance among all points and g(n) + h(n) in this situation will produce same value for every points, we decided to ignore g(n)
+		and changed the formula to f(n) = h(n). It is also named Best-First search. 
+	
+	(2) h(n) = math.sqrt ((currentpoint.x - destination.x) ** 2 + (currentpoint.y - destination.y)**2)
+		(optimal cost from current point to destination by using Euclidean distance)
+
+Because our agent will have four directions (four possible steps, we did not allow our agent to walk diagonally), so at each step we need to choose the point with has the lowest
+A* value, which is the f(n) value. Then our agnet will move to the direciton with that point. 
 
 ## 4 Evaluation
 
