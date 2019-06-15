@@ -55,7 +55,7 @@ def make_action(index,agent_host,agent_position):
         
     if index == 17:
         agent_host.sendCommand("movesouth 1")
-        agent_host.sendCommand('chat /effect @p 17 1 10');
+        agent_host.sendCommand('chat /effect @p 17 1 15');
         time.sleep(1)
         
 
@@ -68,7 +68,7 @@ def make_action(index,agent_host,agent_position):
         
     if index == 11:
         agent_host.sendCommand("movewest 1")
-        agent_host.sendCommand('chat /effect @p 17 1 10');
+        agent_host.sendCommand('chat /effect @p 17 1 15');
         time.sleep(1)
         agent_position[0] = agent_position[0] - 1
     if index == 4:
@@ -76,7 +76,7 @@ def make_action(index,agent_host,agent_position):
         pass
     if index == 13:
         agent_host.sendCommand("moveeast 1")
-        agent_host.sendCommand('chat /effect @p 17 1 10');
+        agent_host.sendCommand('chat /effect @p 17 1 15');
         time.sleep(1)
         agent_position[0] = agent_position[0] + 1     
     if index == 6:
@@ -87,7 +87,7 @@ def make_action(index,agent_host,agent_position):
         agent_position[0] = agent_position[0] - 1
     if index == 7:
         agent_host.sendCommand("movenorth 1")
-        agent_host.sendCommand('chat /effect @p 17 1 10');
+        agent_host.sendCommand('chat /effect @p 17 1 15');
         time.sleep(1)
         agent_position[1] = agent_position[1] - 1
     if index == 8:

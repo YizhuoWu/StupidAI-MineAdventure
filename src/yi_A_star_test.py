@@ -217,7 +217,7 @@ for iRepeat in range(10):
             time.sleep(2)
         else:
             agent_host.sendCommand(action_list[index])
-            agent_host.sendCommand('chat /effect @p 17 1 10')
+            agent_host.sendCommand('chat /effect @p 17 1 15')
             time.sleep(1)
         index += 1
         if len(action_list) == index:
