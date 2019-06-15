@@ -38,10 +38,12 @@ A* value, which is the f(n) value. Then our agnet will move to the direciton wit
 
 The success of the project means our agent moves out of the map(arrive at the destination) while the agent must be alive during the whole game process, which means the health points
 (HP) of the agent should be larger than zero when it gets the exit of the map. The agent with fewer total steps will be treat as more effective.
-For example, the following screenshots show the situation of success and failure 
+For example, the following screenshots show the situation of success and failure
+ 
 Success (The agent successfully arrived at the destination with health points(HP) > 0)
 
 ![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Evaluation/complexA.png?raw=true"complexA")
+
 
 Failure (Tne agent was died on the way to escape the map because of starvation)
 
@@ -58,6 +60,7 @@ console.(total steps: 117)
  
 ![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Evaluation/normalB.png?raw=true"normalB")
 
+
 For the second heuristic(f(n) = g(n) + h(n)), because the algorithm will calculate the best path to destination firstly and print the positions of the path to the console, we can see 
 the coordinates of every steps and computing process clearly in order to debug our program easily. At the same time, the most efficient way for us to see if the agent chooses the best 
 action is to observe the agent in the Minecraft game. If everything goes fine, the agent will walk from the start point to destination with the shortest path and stay alive during the
@@ -66,6 +69,7 @@ As we can see in the following screenshot that the agent successfully arrived at
 console.(total steps: 116)
 
 ![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Evaluation/normalA.png?raw=true"normalA")
+
 
 To sum up, since we run the two algorithms on the same map(as shown above), we can conclude that the second heuristic is more effective than the first one because of the fewer 
 total steps.
