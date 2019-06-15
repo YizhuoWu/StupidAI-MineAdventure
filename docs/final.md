@@ -22,9 +22,9 @@ A* search algorithm is computed by f(n) = g(n) + h(n). We define ‘g(n)’ and 
 	(actual cost from start point to current point by using Manhattan distance)
 	
 and we explored different heuristics:
+
 	(1) h(n) = abs(currentpoint.x - destination.x) + abs (currentpoint.y - destination.y)
 		(actual cost from current point to destination point by using Manhattan distance)
-		
 		Since we have same distance among all points and g(n) + h(n) in this situation will produce same value for every points, we decided to ignore g(n)
 		and changed the formula to f(n) = h(n). It is also named Best-First search. 
 	
