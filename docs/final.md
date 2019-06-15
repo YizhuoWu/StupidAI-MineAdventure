@@ -44,7 +44,6 @@ Success (The agent successfully arrived at the destination with health points(HP
 
 ![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Evaluation/complexA.png?raw=true"complexA")
 
-
 Failure (Tne agent was died on the way to escape the map because of starvation)
 
 ![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Evaluation/complexB.png?raw=true"complexB")
