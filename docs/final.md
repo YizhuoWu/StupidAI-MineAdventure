@@ -36,17 +36,31 @@ A* value, which is the f(n) value. Then our agnet will move to the direciton wit
 
 ## 4 Evaluation
 
-The success of the project means our agent moves out of the map with the best path while the agent must be alive during the whole game process, which means the health points(HP) 
-value of the agent should be larger than zero when it get the exit of the map.
-
+The success of the project means our agent moves out of the map(arrive at the destination) while the agent must be alive during the whole game process, which means the health points
+(HP) of the agent should be larger than zero when it gets the exit of the map. The agent with fewer total steps will be treat as more effective.
+For example, the following screenshots show the situation of success and failure 
+Success (The agent successfully arrived at the destination with health points(HP) > 0)
+![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Evaluation/complexA.png?raw=true"complexA")
+Failure (Tne agent was died on the way to escape the map because of starvation)
+![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Evaluation/complexA.png?raw=true"complexB")
 In order to evaluate this, we have different ways to make sure we know and understand the agent’s behavior.
-
-For the shortest path, because we set different variables to keep track of our agent’s position, the start point and destination of the map. So before the agent making the decision, 
-our algorithm will compute the best action for our agent to take, and we print them in the console and we let our program sleep for seconds, so we can see every action and computing 
-process clearly in order to debug our program easily. At the same time, the most efficient way for us to see if the agent choose the best action is to observe the agent in the 
-Minecraft game. If everything goes fine, the agent will walk from the start point to destination with the shortest path and stay alive during the process, and it will avoid any barriers 
-including walls or lavas. 
-
+For the first heuristic(f(n) = h(n)), because we set different variables to keep track of our agent’s position, the start point and destination of the map. So before the agent making 
+the decision, our algorithm will compute the best action for our agent to take, and we print them in the console and we let our program sleep for seconds, so we can see every action 
+and computing process clearly in order to debug our program easily. At the same time, the most efficient way for us to see if the agent chooses the best action is to observe the agent 
+in the Minecraft game. If everything goes fine, the agent will walk from the start point to destination with the shortest path and stay alive during the process, and it will avoid any
+barriers including walls or lavas. 
+As we can see in the following screenshot that the agent successfully arrived at the destination(red block) with health points > 0 and the total steps the agent spent is shown on the console.
+(total steps: 117) 
+![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Evaluation/normalB.png?raw=true"normalB")
+For the second heuristic(f(n) = g(n) + h(n)), because the algorithm will calculate the best path to destination firstly and print the positions of the path to the console, we can see 
+the coordinates of every steps and computing process clearly in order to debug our program easily. At the same time, the most efficient way for us to see if the agent chooses the best 
+action is to observe the agent in the Minecraft game. If everything goes fine, the agent will walk from the start point to destination with the shortest path and stay alive during the
+process, and it will avoid any barriers including walls or lavas.
+As we can see in the following screenshot that the agent successfully arrived at the destination(red block) with health points > 0 and the total steps the agent spent is shown on the console.
+(total steps: 116)
+![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Evaluation/normalB.png?raw=true"normalA")
+To sum up, since we run the two algorithms on the same map(as shown above), we can conclude that the second heuristic is more effective than the first one because of the fewer 
+total steps.
 ## 5 References
 The most important one is the XML schema documentation from the Malmo official. This document is extremely helpful since the tutorial only gives the user a brief look at how 
 Malmo works but when one really wants to implement a mission, there are a lot of important attributes or XML features in the document and the explanation is clear.
