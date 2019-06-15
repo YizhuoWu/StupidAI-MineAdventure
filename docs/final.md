@@ -46,7 +46,7 @@ Success (The agent successfully arrived at the destination with health points(HP
 
 Failure (Tne agent was died on the way to escape the map because of starvation)
 
-![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Evaluation/complexB.png?raw=true"complexB")
+![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Evaluation/complexA.png?raw=true"complexB")
 
 In order to evaluate this, we have different ways to make sure we know and understand the agent’s behavior.
 For the first heuristic(f(n) = h(n)), because we set different variables to keep track of our agent’s position, the start point and destination of the map. So before the agent making 
