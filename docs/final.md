@@ -58,7 +58,7 @@ action is to observe the agent in the Minecraft game. If everything goes fine, t
 process, and it will avoid any barriers including walls or lavas.
 As we can see in the following screenshot that the agent successfully arrived at the destination(red block) with health points > 0 and the total steps the agent spent is shown on the console.
 (total steps: 116)
-![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Evaluation/normalB.png?raw=true"normalA")
+![alt text](https://github.com/YizhuoWu/StupidAI-MineAdventure/blob/master/docs/arts/Evaluation/normalA.png?raw=true"normalA")
 To sum up, since we run the two algorithms on the same map(as shown above), we can conclude that the second heuristic is more effective than the first one because of the fewer 
 total steps.
 ## 5 References
