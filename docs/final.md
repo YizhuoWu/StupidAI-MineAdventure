@@ -77,4 +77,5 @@ The most important one is the XML schema documentation from the Malmo official. 
 Malmo works but when one really wants to implement a mission, there are a lot of important attributes or XML features in the document and the explanation is clear.
 We also read about alpha-beta pruning algorithm and A* search algorithm from UC Irvine professor Lathrop’s website. The lecture slides explain everything in a very detailed way 
 and it helped us a lot when we implement the algorithm and make changes to them.
+The website https://www.geeksforgeeks.org/a-search-algorithm/ give us some hints of implementing A* search algorithm.
 We also looked through the website https://gitter.im/Microsoft/malmo# to find some useful tips for approaching our functionality (e.g. chat command).
